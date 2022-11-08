@@ -1,0 +1,39 @@
+[tool.autopep8]
+max_line_length = 120
+# ignore = "E501,W6"  # or ["E501", "W6"]
+in-place = true
+recursive = true
+aggressive = 3
+
+[tool.poetry]
+name = "hem-armm"
+version = "0.1.0"
+description = ""
+authors = [
+    "Jimmy Moore <moorej@objectcomputing.com>",
+]
+readme = "README.md"
+packages = [{include = "hem"}]
+
+[tool.poetry.dependencies]
+python = "~3.10"
+pydantic = "1.10.1"
+joblib = "^1.2.0"
+scipy = "1.9.1"
+scikit-learn = "^1.1.2"
+pandas = "^1.5.0"
+numpy = "^1.23.2"
+geopy = "^2.2.0"
+pycountry = "^22.3.5"
+
+[tool.poetry.dev-dependencies]
+autopep8 = "^1.7.0"
+coverage = "^6.4.2"
+fastapi = "0.81.0"
+pytest = "^7.1.2"
+uvicorn = "0.18.3"
+requests = "^2.28.1"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
