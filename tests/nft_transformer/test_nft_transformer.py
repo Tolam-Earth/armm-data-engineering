@@ -1,3 +1,18 @@
+
+# Copyright (c) 2022 Tolam Earth
+#
+# Licensed under the Apache License, Version 2.0 (the "License"); you may not
+# use this file except in compliance with the License. You may obtain a copy
+# of the License at
+#
+# http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
+# WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
+# License for the specific language governing permissions and limitations under
+# the License.
+
 from fastapi.testclient import TestClient
 import time
 from services.nft_transformer.main import app, API_PREFIX, nft
@@ -5,21 +20,6 @@ from services.nft_transformer.main import app, API_PREFIX, nft
 client = TestClient(app)
 
 TWO_MINUTES_IN_NANOSECONDS = 120000000000.0
-
-# MINTED_NFT = {
-#     "msg_type": "MINTED",
-#     "asset_id": "9DEFC49A.D0A4.4BED866F.6D083A-1E1BE8-560984084",
-#     "minting_owner": "9DEFC49A.D0A4.4BED866F",
-#     "minting_time": 1648788141000000000,  # 2022-04-01T04:42:21Z as nanoseconds since epoch
-#     "transaction_id": "94F5-7CB4D0DFB04C",
-#     "transaction_memo": "Von der Lebendigen Erde gGmbH verifizierte CO2-Ausgleiche.",
-#     "project_category": "FOREST_CONSERV",
-#     "project_type": "EFF_REFOR",
-#     "country": "CMR",
-#     "first_subdivision": "CM-SW",
-#     "device_id": "CBB84414-862A-5BCD516FC635",
-#     "guardian_id": "7227-4CD0-B164-0E8A-106E-1510"
-# }
 
 
 class TestTransformer:
@@ -29,7 +29,6 @@ class TestTransformer:
             "msg_type": ["LISTED", "LISTED", "LISTED", ],
             "country": "USA",
             "first_subdivision": "MO",
-            "minting_time": 1661400288,
             "transaction_id": ["abc12345678", "abc12345679", "abc12345680"],
             "transaction_time": [
                 {"seconds": 1661967010, "nanos": 335616988},
@@ -44,7 +43,6 @@ class TestTransformer:
             "msg_type": ["LISTED", "LISTED", "LISTED"],
             "country": "USA",
             "first_subdivision": "MO",
-            "minting_time": 1661400288,
             "transaction_id": ["abc12345678", "abc12345679", "abc12345680"],
             "transaction_time": [
                 {"seconds": 1661967010, "nanos": 335616988},
@@ -113,7 +111,6 @@ class TestPricingTransforms:
         ],
         "country": "USA",
         "first_subdivision": "MO",
-        "minting_time": 1661400288,
         "transaction_id": [
             "abc12345678",
             "abc23456781",

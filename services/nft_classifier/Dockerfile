@@ -10,7 +10,7 @@
 #   # --publish 8001:8080 exposes FastAPI's port 8080 in container as port 8001 on local machine.
 #   docker run --rm --publish 8001:8080 --interactive --tty --workdir /app --name nft-classifier nft-classifier
 
-FROM us-central1-docker.pkg.dev/armm-sandbox/hem-armm/nft-base:latest
+FROM nft-base:latest
 
 ENV PIP_NO_CACHE_DIR=on \
     PIP_DISABLE_PIP_VERSION_CHECK=on

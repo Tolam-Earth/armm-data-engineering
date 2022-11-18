@@ -1,3 +1,18 @@
+
+# Copyright (c) 2022 Tolam Earth
+#
+# Licensed under the Apache License, Version 2.0 (the "License"); you may not
+# use this file except in compliance with the License. You may obtain a copy
+# of the License at
+#
+# http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
+# WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
+# License for the specific language governing permissions and limitations under
+# the License.
+
 import time
 from typing import Optional
 
@@ -21,7 +36,6 @@ class TestNftDetails:
         "msg_type": ["MINTED", "LISTED", "LISTED", "LISTED", ],
         "country": "USA",
         "first_subdivision": "MO",
-        "minting_time": 1661400288,
         "transaction_id": ["abc12345677", "abc12345678", "abc12345679", "abc12345680"],
         "transaction_time": [
             {"seconds": 1661400288, "nanos": 335616980},
@@ -48,29 +62,6 @@ class TestNftDetails:
         # mostly just testing that this is valid data with a successful parse_obj
         assert nft_details.nft_id.token_id == "1.2.3"
         assert nft_details.first_subdivision == '75C'
-
-    def test_negative_minting_time(self):
-        data = self.valid_data.copy()
-        data['minting_time'] = -1
-
-        with pytest.raises(ValidationError, match='ensure this value is greater than or equal to 0'):
-            nft.NftDetails.parse_obj(data)
-
-    def test_float_minting_time(self):
-        data = self.valid_data.copy()
-        data['minting_time'] = 1.55
-
-        nft_details = nft.NftDetails.parse_obj(data)
-
-        assert nft_details.minting_time == 1.55
-
-    def test_float_str_minting_time(self):
-        data = self.valid_data.copy()
-        data['minting_time'] = "1.55"
-
-        nft_details = nft.NftDetails.parse_obj(data)
-
-        assert nft_details.minting_time == 1.55
 
     def test_negative_transaction_time(self):
         data = self.valid_data.copy()
@@ -143,7 +134,6 @@ class TestNftDetails:
             "msg_type": ["MINTED"],
             "country": "USA",
             "first_subdivision": "MO",
-            "minting_time": 1661400288,
             "transaction_id": ["abc12345677"],
             "transaction_time": [
                 {"seconds": 1661400288, "nanos": 335616980},
@@ -163,7 +153,6 @@ class TestNftDetails:
             "msg_type": ["MINTED", "LISTED"],
             "country": "USA",
             "first_subdivision": "IL",
-            "minting_time": 1661400288,
             "transaction_id": ["abc12345677", "abc12345678"],
             "transaction_time": [
                 {"seconds": 1661400288, "nanos": 335616980},
@@ -181,7 +170,6 @@ class TestTransformDetails:
         "msg_type": ["MINTED", "LISTED", "LISTED", "LISTED", ],
         "country": "USA",
         "first_subdivision": "MO",
-        "minting_time": 1661400288,
         "transaction_id": ["abc12345677", "abc12345678", "abc12345679", "abc12345680"],
         "transaction_time": [
             {"seconds": 1661967000, "nanos": 335616980},

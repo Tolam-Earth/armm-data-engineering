@@ -55,7 +55,6 @@ curl -X POST http://127.0.0.1:8000/arm/v1/data_transformer \
     "msg_type": ["MINTED", "LISTED", "PURCHASED", "LISTED"], 
     "country": "CHN", 
     "first_subdivision": "GD", 
-    "minting_time": 1661141001, 
     "transaction_id": [
       "abc12345678", 
       "abc23456791", 
@@ -95,71 +94,10 @@ Although the `nft_age` (in days) will be different when you run this request,
 because the age is calculated with respect to the current time at the
 time of the request.
 
-### Sample error messages
-This request has a `minting_time` value that exceeds the maximum
-allowed value:
-```bash
-curl -X POST \
-  -H "Content-Type: application/json" \
-  -d '{"minting_time": 253402300799123456789}' \
-  http://127.0.0.1:8000/nft-transformer/v1/nft/details
-```
-
-It returns:
-
-```json
-{
-  "request_body": {
-    "minting_time": 253402300799123456789
-  },
-  "errors": [
-    {
-      "loc": [
-        "body",
-        "minting_time"
-      ],
-      "msg": "minting_time=253402300799123456789 as integer nanoseconds from Unix epoch is not in the expected range [-2177452800000000000, 253402300799000000000] = [0001-01-01T00:00:00Z, 9999-12-31T23:59:59Z].",
-      "type": "value_error"
-    }
-  ],
-  "nft_age": null
-}
-```
-
-Another example has a malformed `asset_id`:
-```bash
-curl -X POST \
-  -H "Content-Type: application/json" \
-  -d '{"asset_id": "0.0.1", "minting_time": 1566015267000000000}' \
-  http://127.0.0.1:8000/nft-transformer/v1/nft/details
-```
-
-which returns:
-
-```json
-{
-  "request_body": {
-    "asset_id": "0.0.1",
-    "minting_time": 1566015267000000000
-  },
-  "errors": [
-    {
-      "loc": [
-        "body",
-        "asset_id"
-      ],
-      "msg": "asset_id='0.0.1' is not formatted with four components as shard.realm.num.serialnumber",
-      "type": "value_error"
-    }
-  ],
-  "nft_age": null
-}
-```
-
 ## Running the service locally
 The server does _not_ need to be running, in order to run unit tests. However,
-if you want to submit HTTP requests to the service while developing locally,
-start the service locally with this command:
+if you want to submit HTTP requests to the service while developing locally
+without building a Docker image, start the service locally with this command:
 
 ```bash
 cd <your-path>/hem-armm-engineering/services/nft_transformer
@@ -167,24 +105,6 @@ uvicorn main:app --reload
 ```
 
 Use `<CTRL-C>` to stop the service.
-
-### Sample HTTP request
-```bash
-curl -X POST \
-  -H "Content-Type: application/json" \
-  -d '{"minting_time": 1566015267000000000}' \
-  http://127.0.0.1:8000/nft-transformer/v1/nft/details
-```
-
-which returns:
-
-```json
-{"nft_age":1103,"errors":null}
-```
-
-Although the `nft_age` (in days) will be different when you run this request,
-because the age is calculated with respect to the current time at the
-time of the request.
 
 ## Viewing the API
 The API documentation is available at:
@@ -197,3 +117,12 @@ For example:
 ```
 http://127.0.0.1:8000/docs
 ```
+
+## License
+Copyright &copy; 2022 Tolam Earth
+
+Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License. You may obtain a copy of the License at 
+
+http://www.apache.org/licenses/LICENSE-2.0 
+
+Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language governing permissions and limitations under the License.

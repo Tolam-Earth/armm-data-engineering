@@ -2,14 +2,8 @@
 # Builds a base image with Python to be used for services
 #
 # To build the image from the root directory of the project:
-#   cd <path>/hem-armm-engineering/
+#   cd <path>/ARMM-Data-Engineering/
 #   docker build -f services/nft_base/Dockerfile --platform amd64 -t nft-base .
-#
-# To push the image to the repository:
-#   Tag the local image:
-#     docker tag nft-base:latest us-central1-docker.pkg.dev/armm-sandbox/hem-armm/nft-base:latest
-#   Push the tagged image to the registry:
-#     docker push us-central1-docker.pkg.dev/armm-sandbox/hem-armm/nft-base:latest
 FROM ubuntu:22.04 as builder
 
 # install base python3.10 needs

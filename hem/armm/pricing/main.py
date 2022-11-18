@@ -1,3 +1,18 @@
+
+# Copyright (c) 2022 Tolam Earth
+#
+# Licensed under the Apache License, Version 2.0 (the "License"); you may not
+# use this file except in compliance with the License. You may obtain a copy
+# of the License at
+#
+# http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
+# WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
+# License for the specific language governing permissions and limitations under
+# the License.
+
 import json
 import argparse
 import numpy as np
@@ -19,6 +34,14 @@ def get_arguments():
 
 
 def main(pool_id, n_nft: int, pool_meta: list, r: float = CONSTANT_R) -> dict[str: float]:
+    """
+    :param pool_id: pool id of NFTs to be priced
+    :param n_nft: number of NFTs in the current call
+    :param pool_meta: the metadata of all pools
+    :param r: quantity of a reserve currency in USD cents
+
+    :return: dictionary with min and max recommended prices
+    """
     pool_index = next((index for (index, _pool) in enumerate(pool_meta) if _pool["id"] == pool_id))
     x_matrix = np.transpose(np.array([_pool['mean_pool'] for _pool in pool_meta], dtype=float))
     q = np.array([_pool['n_pool'] for _pool in pool_meta], dtype=int)
@@ -26,7 +49,7 @@ def main(pool_id, n_nft: int, pool_meta: list, r: float = CONSTANT_R) -> dict[st
     min_price = arm_buys_price(x_matrix, q, pool_index, n_nft, r)
     max_price = arm_sells_price(x_matrix, q, pool_index, n_nft, r)
 
-    return {"min_price_usd_cents": min_price/n_nft, "max_price_usd_cents": max_price/n_nft}
+    return {"min_price_usd_cents": min_price / n_nft, "max_price_usd_cents": max_price / n_nft}
 
 
 if __name__ == '__main__':

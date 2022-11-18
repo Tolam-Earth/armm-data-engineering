@@ -1,5 +1,7 @@
 # Generating Simulated Data
 
+Simulated data facilitated the creation of the ARMM framework. It was integral to build algorithms to cluster non-fungible tokens' attributes. Furthermore, unit tests and integrations tests motivated its creation. User assumes risk using these simulated data to build new clustering and pricing models as it is not real market data. Non-heuristic models should be trained with real market data.
+
 ## main.py
 
 ```
@@ -9,8 +11,7 @@
 
 ## Attribute definitions/types
 
-The implementation follows the `names` and `types` of attributes defined in [Table of Token Attributes](https://github.com/objectcomputing/hem-architecture/blob/harmm-83/armm/information/data-model-ingestion.md#table-of-token-attributes), 
-[Attributes](https://docs.google.com/spreadsheets/d/1WbklEAZmLkCasoOHP5rRWjy9mxXntZe_bcLAtGUU5G8/edit#gid=302393529), and
+The implementation follows the `names` and `types` of attributes defined in [Table of Token Attributes](https://github.com/objectcomputing/hem-architecture/blob/main/armm/information/data-model-ingestion.md#table-of-token-attributes) and
 [initial test data for Ingest process](https://docs.google.com/spreadsheets/d/1A_cYJFvlUrDLyqUoaXckB2UPW_sFLKMiDXxLJsiQtYM/edit#gid=0)
 
 Following is a summary of distributions used in generating data:
@@ -37,3 +38,12 @@ Following is a summary of distributions used in generating data:
 will have similar prices than those farther apart. Instead of conditioning on the country name, use a [spatial function](https://pdixon.stat.iastate.edu/stat406/notes/part%209%20sim%20annotated.pdf)
 2. List of countries is the same for setting different means in price. It will be worthwhile to have different lists to be able to validate that
 the grid search algorithm to determine optimal number of k is reasonable and number of categories can influence this.
+
+## License
+Copyright &copy; 2022 Tolam Earth
+
+Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License. You may obtain a copy of the License at 
+
+http://www.apache.org/licenses/LICENSE-2.0 
+
+Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language governing permissions and limitations under the License.
