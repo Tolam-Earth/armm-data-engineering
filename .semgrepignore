@@ -1,0 +1,5 @@
+# False positives
+# dockerfile.security.missing-user.missing-user
+services/nft_classifier/Dockerfile
+services/nft_pricing/Dockerfile
+services/nft_transformer/Dockerfile
